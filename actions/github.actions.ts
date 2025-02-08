@@ -2,10 +2,8 @@
 
 import { GitHubCommitData } from "@/interfaces/commit.interface";
 
-export const fetchRepoCommits = async () => {
-  const owner = "Yukine2133";
-  const repo = "mywaifulist-next";
-  const perPage = 100; // Max allowed per request
+export const fetchRepoCommits = async (owner: string, repo: string) => {
+  const perPage = 100;
   let page = 1;
   const allCommits: GitHubCommitData[] = [];
   let fetchedCommits: GitHubCommitData[] = [];
@@ -21,12 +19,12 @@ export const fetchRepoCommits = async () => {
       }
     );
 
-    if (!res.ok) break; // Stop if request fails
+    if (!res.ok) break;
 
     fetchedCommits = await res.json();
     allCommits.push(...fetchedCommits);
     page++;
-  } while (fetchedCommits.length === perPage); // Continue until fewer than `perPage` results
+  } while (fetchedCommits.length === perPage);
 
   return allCommits;
 };
