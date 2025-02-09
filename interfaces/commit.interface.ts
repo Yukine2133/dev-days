@@ -37,3 +37,7 @@ export interface GitHubCommitData {
   committer: GitHubUser | null;
   parents: { sha: string; url: string; html_url: string }[];
 }
+
+export interface CommitStatsProps {
+  commits: GitHubCommitData[];
+}
