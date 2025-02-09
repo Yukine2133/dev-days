@@ -36,10 +36,7 @@ const RepositoryInput = ({
   };
 
   return (
-    <form
-      className="flex  flex-col items-center justify-center"
-      onSubmit={handleSubmit}
-    >
+    <form className="flex  flex-col  justify-center" onSubmit={handleSubmit}>
       <Input
         className="w-[40rem] bg-[#313131] outline-none"
         type="text"
