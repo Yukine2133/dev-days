@@ -4,8 +4,13 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { fetchRepoCommits } from "@/actions/github.actions";
+import { GitHubCommitData } from "@/interfaces/commit.interface";
 
-const RepositoryInput = () => {
+const RepositoryInput = ({
+  setCommits,
+}: {
+  setCommits: (arg0: GitHubCommitData[]) => void;
+}) => {
   const [repoUrl, setRepoUrl] = useState("");
   const [error, setError] = useState("");
 
@@ -27,10 +32,14 @@ const RepositoryInput = () => {
     setError("");
     const commits = await fetchRepoCommits(owner, repo);
     console.log(commits);
+    setCommits(commits);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      className="flex  flex-col items-center justify-center"
+      onSubmit={handleSubmit}
+    >
       <Input
         className="w-[40rem] bg-[#313131] outline-none"
         type="text"
