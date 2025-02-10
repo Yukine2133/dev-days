@@ -32,10 +32,12 @@ export const useCommitStats = ({
       maxCommits,
       maxCommitDate,
       commitDates: Object.keys(commitCountByDay),
+      commitCountByDay,
     };
   };
 
-  const { maxCommitDate, maxCommits, commitDates } = getMaxCommitsADay();
+  const { maxCommitDate, maxCommits, commitDates, commitCountByDay } =
+    getMaxCommitsADay();
 
   const formattedMaxCommitDate = maxCommitDate
     ? new Date(maxCommitDate).toLocaleDateString("en-GB", {
@@ -81,5 +83,7 @@ export const useCommitStats = ({
     formattedMaxCommitDate,
     maxCommits,
     longestStreak,
+    commits,
+    commitCountByDay,
   };
 };
