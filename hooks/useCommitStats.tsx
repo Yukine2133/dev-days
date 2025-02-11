@@ -4,6 +4,7 @@ import { useLongestCommitStreak } from "./commitsStats/useLongestCommitStreak ";
 import { useCommitHours } from "./commitsStats/useCommitHours";
 import { formatCommitDate } from "@/utils/formatTime";
 import { useUniqueCommitDays } from "./commitsStats/useUniqueCommitDays";
+import { useCommitActivityAnalysis } from "./useCommitActivityAnalysis";
 
 export const useCommitStats = (commits: GitHubCommitData[]) => {
   const { maxCommitDate, maxCommits, commitCountByDay } =
@@ -12,6 +13,12 @@ export const useCommitStats = (commits: GitHubCommitData[]) => {
   const commitCountByHour = useCommitHours(commits);
   const formattedMaxCommitDate = formatCommitDate(maxCommitDate);
   const uniqueCommitDays = useUniqueCommitDays(commits);
+  const {
+    leastActiveTimePeriod,
+    getMostActiveHours,
+    mostActiveTimePeriod,
+    timeLabels,
+  } = useCommitActivityAnalysis(commitCountByHour);
 
   // Convert commit data into heatmap format
   const heatmapData = Object.entries(commitCountByDay).map(([date, count]) => ({
@@ -24,9 +31,11 @@ export const useCommitStats = (commits: GitHubCommitData[]) => {
     maxCommits,
     longestStreak,
     commits,
-    commitCountByDay,
-    commitCountByHour,
     uniqueCommitDays,
     heatmapData,
+    leastActiveTimePeriod,
+    getMostActiveHours,
+    mostActiveTimePeriod,
+    timeLabels,
   };
 };

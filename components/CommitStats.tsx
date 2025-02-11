@@ -1,7 +1,6 @@
 import { useCommitStats } from "@/hooks/useCommitStats";
 import { CommitStatsProps } from "@/interfaces/commit.interface";
 import { Heatmap } from "./HeatMap";
-import { useCommitActivityAnalysis } from "@/hooks/useCommitActivityAnalysis";
 
 const CommitStats = ({ commits }: CommitStatsProps) => {
   const {
@@ -9,16 +8,12 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
     maxCommits,
     longestStreak,
     heatmapData,
-    commitCountByHour,
     uniqueCommitDays,
-  } = useCommitStats(commits);
-
-  const {
     leastActiveTimePeriod,
     getMostActiveHours,
     mostActiveTimePeriod,
     timeLabels,
-  } = useCommitActivityAnalysis(commitCountByHour);
+  } = useCommitStats(commits);
 
   return (
     <div>
