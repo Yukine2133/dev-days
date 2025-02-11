@@ -13,6 +13,8 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
     getMostActiveHours,
     mostActiveTimePeriod,
     timeLabels,
+    mostCommonWord,
+    maxCount,
   } = useCommitStats(commits);
 
   return (
@@ -50,6 +52,12 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
           {timeLabels[leastActiveTimePeriod.period]}
         </span>
         .
+      </h2>
+
+      <h2 className="text-xl mt-4">
+        Most common commit message:{" "}
+        <span className="font-bold">{mostCommonWord}</span> with{" "}
+        <span className="font-bold">{maxCount}</span> occurrences
       </h2>
 
       <Heatmap commits={commits} heatmapData={heatmapData} />
