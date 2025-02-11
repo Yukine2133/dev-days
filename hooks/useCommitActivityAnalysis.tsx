@@ -1,3 +1,4 @@
+import { formatHour } from "@/utils/formatHour";
 import { useMemo } from "react";
 
 export const useCommitActivityAnalysis = (
@@ -58,8 +59,23 @@ export const useCommitActivityAnalysis = (
       night: "Night (12 AM - 6 AM)",
     };
 
+    const getMostActiveHours = () => {
+      if (!mostActiveHour || mostActiveHour.count === 0) {
+        return <h2 className="text-xl mt-4">No commit activity recorded.</h2>;
+      }
+
+      return (
+        <h2 className="text-xl mt-4">
+          Your most productive hour is{" "}
+          <span className="font-bold">{formatHour(mostActiveHour.hour)}</span>{" "}
+          with <span className="font-bold">{mostActiveHour.count} commits</span>
+          .
+        </h2>
+      );
+    };
+
     return {
-      mostActiveHour,
+      getMostActiveHours,
       mostActiveTimePeriod,
       leastActiveTimePeriod,
       timeLabels,

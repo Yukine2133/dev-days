@@ -18,7 +18,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
 
   const {
     leastActiveTimePeriod,
-    mostActiveHour,
+    getMostActiveHours,
     mostActiveTimePeriod,
     timeLabels,
   } = useCommitActivityAnalysis(commitCountByHour);
@@ -48,19 +48,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
         <span className="font-bold">{longestStreak} days</span>.
       </h2>
 
-      <h2 className="text-xl mt-4">
-        Your most productive hour is{" "}
-        <span className="font-bold">
-          {mostActiveHour.hour === 0
-            ? "12 AM"
-            : mostActiveHour.hour < 12
-            ? `${mostActiveHour.hour} AM`
-            : mostActiveHour.hour === 12
-            ? "12 PM"
-            : `${mostActiveHour.hour - 12} PM`}
-        </span>{" "}
-        with <span className="font-bold">{mostActiveHour.count} commits</span>.
-      </h2>
+      {getMostActiveHours()}
 
       <h2 className="text-xl mt-4">
         You commit the most in the{" "}
