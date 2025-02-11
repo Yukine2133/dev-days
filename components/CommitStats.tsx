@@ -68,19 +68,21 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
           const height = Number(props.height) || 0;
 
           return (
-            <g>
+            <g
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = "1";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = isSelected ? "1" : "0.6";
+              }}
+              style={{ cursor: "pointer", opacity: isSelected ? 1 : 0.6 }}
+              onClick={() => setSelected(isSelected ? "" : data.date)}
+            >
               {/* Commit cell */}
               <rect
                 {...props}
-                opacity={isSelected ? 1 : 0.6}
-                cursor="pointer"
                 stroke={isSelected ? "#000" : "none"}
                 strokeWidth={isSelected ? 1.5 : 0}
-                onClick={() => setSelected(isSelected ? "" : data.date)}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.opacity = isSelected ? "1" : "0.6")
-                }
               />
 
               {/* Commit count text */}
@@ -90,8 +92,9 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
                 textAnchor="middle"
                 alignmentBaseline="middle"
                 fontSize="10"
-                fill={data.count > 10 ? "#fff" : "#000"} // Adjust text color for contrast
+                fill={data.count > 10 ? "#fff" : "#000"}
                 fontWeight="bold"
+                pointerEvents="none"
               >
                 {data.count}
               </text>
