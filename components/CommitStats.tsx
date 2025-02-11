@@ -8,7 +8,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
     formattedMaxCommitDate,
     maxCommits,
     longestStreak,
-    commitCountByDay,
+    heatmapData,
     commitCountByHour,
     uniqueCommitDays,
   } = useCommitStats(commits);
@@ -19,12 +19,6 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
     mostActiveTimePeriod,
     timeLabels,
   } = useCommitActivityAnalysis(commitCountByHour);
-
-  // Convert commit data into heatmap format
-  const heatmapData = Object.entries(commitCountByDay).map(([date, count]) => ({
-    date: date.replace(/-/g, "/"), // Convert YYYY-MM-DD to YYYY/MM/DD
-    count,
-  }));
 
   return (
     <div>

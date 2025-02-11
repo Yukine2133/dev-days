@@ -13,6 +13,12 @@ export const useCommitStats = (commits: GitHubCommitData[]) => {
   const formattedMaxCommitDate = formatCommitDate(maxCommitDate);
   const uniqueCommitDays = useUniqueCommitDays(commits);
 
+  // Convert commit data into heatmap format
+  const heatmapData = Object.entries(commitCountByDay).map(([date, count]) => ({
+    date: date.replace(/-/g, "/"), // Convert YYYY-MM-DD to YYYY/MM/DD
+    count,
+  }));
+
   return {
     formattedMaxCommitDate,
     maxCommits,
@@ -21,5 +27,6 @@ export const useCommitStats = (commits: GitHubCommitData[]) => {
     commitCountByDay,
     commitCountByHour,
     uniqueCommitDays,
+    heatmapData,
   };
 };
