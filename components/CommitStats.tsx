@@ -1,20 +1,17 @@
-import { GetUniqueCommitDays } from "@/hooks/getUniqueCommitDays";
 import { useCommitStats } from "@/hooks/useCommitStats";
 import { CommitStatsProps } from "@/interfaces/commit.interface";
 import { Heatmap } from "./HeatMap";
 import { useCommitActivityAnalysis } from "@/hooks/useCommitActivityAnalysis";
 
 const CommitStats = ({ commits }: CommitStatsProps) => {
-  const uniqueCommitDays = GetUniqueCommitDays({ commits });
   const {
     formattedMaxCommitDate,
     maxCommits,
     longestStreak,
     commitCountByDay,
     commitCountByHour,
-  } = useCommitStats({
-    commits,
-  });
+    uniqueCommitDays,
+  } = useCommitStats(commits);
 
   const {
     leastActiveTimePeriod,

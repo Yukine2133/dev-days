@@ -2,11 +2,7 @@ import { GitHubCommitData } from "@/interfaces/commit.interface";
 import { formatDate } from "@/utils/formatDate";
 import { useMemo } from "react";
 
-export const GetUniqueCommitDays = ({
-  commits,
-}: {
-  commits: GitHubCommitData[];
-}) => {
+export const useUniqueCommitDays = (commits: GitHubCommitData[]) => {
   // Compute unique days when commits were made
   const uniqueCommitDays = useMemo(() => {
     const uniqueDates = new Set(
