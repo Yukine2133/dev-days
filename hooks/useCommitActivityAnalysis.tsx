@@ -53,10 +53,10 @@ export const useCommitActivityAnalysis = (
     );
 
     const timeLabels: Record<string, string> = {
-      morning: "Morning (6 AM - 12 PM)",
-      afternoon: "Afternoon (12 PM - 6 PM)",
-      evening: "Evening (6 PM - 12 AM)",
-      night: "Night (12 AM - 6 AM)",
+      morning: "🌅 Early Riser (6 AM - 12 PM)",
+      afternoon: "☀️ Afternoon Hustler (12 PM - 6 PM)",
+      evening: "🌆 Night Owl (6 PM - Midnight)",
+      night: "🌙 Midnight Coder (Midnight - 6 AM)",
     };
 
     const getMostActiveHours = () => {
