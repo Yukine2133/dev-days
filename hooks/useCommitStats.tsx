@@ -77,6 +77,19 @@ export const useCommitStats = ({
     return longestStreak;
   };
 
+  const getHoursOfCommits = () => {
+    const commitCountByHour: Record<number, number> = {};
+
+    commits.forEach((commit) => {
+      const hour = new Date(commit.commit.committer.date).getHours();
+      commitCountByHour[hour] = (commitCountByHour[hour] || 0) + 1;
+    });
+
+    return commitCountByHour;
+  };
+
+  const commitCountByHour = getHoursOfCommits();
+
   const longestStreak = getLongestCommitStreak();
 
   return {
@@ -85,5 +98,6 @@ export const useCommitStats = ({
     longestStreak,
     commits,
     commitCountByDay,
+    commitCountByHour,
   };
 };
