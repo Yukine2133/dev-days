@@ -41,21 +41,19 @@ const RepositoryInput = ({
       onSubmit={handleSubmit}
     >
       <Input
-        className="w-full rounded-lg bg-zinc-800/50 px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        className="w-full rounded-lg h-12 bg-zinc-800/50 px-4 py-3 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
         type="text"
         placeholder="Enter a repository link"
         value={repoUrl}
         onChange={(e) => setRepoUrl(e.target.value)}
       />
       {error && <p className="text-red-500">{error}</p>}
-      <div className="flex mt-4 justify-end">
-        <Button
-          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md bg-purple-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-purple-700"
-          type="submit"
-        >
-          Search
-        </Button>
-      </div>
+      <Button
+        className="absolute right-2 top-1/2 h-8 -translate-y-1/2 rounded-md bg-purple-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-purple-700"
+        type="submit"
+      >
+        Search
+      </Button>
     </form>
   );
 };
