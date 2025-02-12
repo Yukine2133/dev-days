@@ -16,8 +16,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
     mostActiveHour,
     mostActiveTimePeriod,
     timeLabels,
-    mostCommonWord,
-    maxCount,
+    mostCommonWords,
   } = useCommitStats(commits);
 
   return (
@@ -95,19 +94,21 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
       {/* Most Common Commit Message */}
       <CommitStatsCard
         Icon={GitCommit}
-        label="Most Common Commit Message"
+        label="Most Common Commit Words"
         delay={0.6}
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <GitCommit className="h-4 w-4 text-purple-400" />
-            <span className="text-lg font-medium text-white">
-              {mostCommonWord}
-            </span>
-          </div>
-          <span className="rounded-full bg-purple-600/10 px-2.5 py-0.5 text-sm font-medium text-purple-400">
-            {maxCount} occurrences
-          </span>
+        <div className="space-y-2">
+          {mostCommonWords.map(({ word, count }, index) => (
+            <div key={index} className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <GitCommit className="h-4 w-4 text-purple-400" />
+                <span className="text-lg font-medium text-white">{word}</span>
+              </div>
+              <span className="rounded-full bg-purple-600/10 px-2.5 py-0.5 text-sm font-medium text-purple-400">
+                {count} occurrences
+              </span>
+            </div>
+          ))}
         </div>
       </CommitStatsCard>
 

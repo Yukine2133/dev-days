@@ -45,36 +45,27 @@ const stopwords = new Set([
   "else",
 ]);
 
-export const useMostCommonCommitWord = (commits: GitHubCommitData[]) => {
+export const useMostCommonCommitWords = (commits: GitHubCommitData[]) => {
   const wordCount: Record<string, number> = {};
 
-  // Extract words from each commit message and count their occurrences
   commits.forEach((commit) => {
     const message = commit.commit.message;
 
-    // Split the message into words, remove punctuation, convert to lowercase, and remove stopwords
     const words = message
       .toLowerCase()
-      .replace(/[^\w\s]/g, "") // Remove punctuation
-      .split(/\s+/) // Split by whitespace
-      .filter((word) => !stopwords.has(word)); // Remove stopwords
+      .replace(/[^\w\s]/g, "")
+      .split(/\s+/)
+      .filter((word) => !stopwords.has(word));
 
     words.forEach((word) => {
       wordCount[word] = (wordCount[word] || 0) + 1;
     });
   });
 
-  // Find the most common word
-  let mostCommonWord = "";
-  let maxCount = 0;
+  const topWords = Object.entries(wordCount)
+    .filter(([word]) => word.length > 1)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3);
 
-  Object.entries(wordCount).forEach(([word, count]) => {
-    if (count > maxCount && word.length > 1) {
-      // Ignore very short words like "I", etc.
-      maxCount = count;
-      mostCommonWord = word;
-    }
-  });
-
-  return { mostCommonWord, maxCount };
+  return topWords.map(([word, count]) => ({ word, count }));
 };
