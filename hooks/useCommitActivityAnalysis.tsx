@@ -53,19 +53,18 @@ export const useCommitActivityAnalysis = (
     );
 
     const timeLabels: Record<string, string> = {
-      morning: "🌅 Early Riser (6 AM - 12 PM)",
-      afternoon: "☀️ Afternoon Hustler (12 PM - 6 PM)",
-      evening: "🌆 Night Owl (6 PM - Midnight)",
-      night: "🌙 Midnight Coder (Midnight - 6 AM)",
+      morning: "Morning (6 AM - 12 PM)",
+      afternoon: "Afternoon (12 PM - 6 PM)",
+      evening: "Evening (6 PM - 12 AM)",
+      night: "Night (12 AM - 6 AM)",
     };
-
     const getMostActiveHours = () => {
       if (!mostActiveHour || mostActiveHour.count === 0) {
         return <h2 className="text-xl mt-4">No commit activity recorded.</h2>;
       }
 
       return (
-        <h2 className="text-xl mt-4">
+        <h2 className="text-xl mt-4 border-b border-stone-700 px-4 pb-2">
           Your most productive hour is{" "}
           <span className="font-bold">{formatHour(mostActiveHour.hour)}</span>{" "}
           with <span className="font-bold">{mostActiveHour.count} commits</span>
