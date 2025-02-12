@@ -18,7 +18,7 @@ export const useCommitStats = (commits: GitHubCommitData[]) => {
 
   const {
     leastActiveTimePeriod,
-    getMostActiveHours,
+    mostActiveHour,
     mostActiveTimePeriod,
     timeLabels,
   } = useCommitActivityAnalysis(commitCountByHour);
@@ -37,7 +37,7 @@ export const useCommitStats = (commits: GitHubCommitData[]) => {
     uniqueCommitDays,
     heatmapData,
     leastActiveTimePeriod,
-    getMostActiveHours,
+    mostActiveHour,
     mostActiveTimePeriod,
     timeLabels,
     mostCommonWord,
