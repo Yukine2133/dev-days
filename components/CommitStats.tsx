@@ -29,7 +29,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <Card className="bg-zinc-800/50 border-zinc-700">
+          <Card className="bg-zinc-800/50 border-zinc-700 h-[126px]  ">
             <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
               <CardTitle className="text-zinc-100 text-sm font-medium">
                 Project Duration
@@ -37,7 +37,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
               <Calendar className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">
+              <div className="text-2xl mt-2  font-bold text-white">
                 {uniqueCommitDays} days
               </div>
             </CardContent>
@@ -93,7 +93,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          <Card className="bg-zinc-800/50 border-zinc-700">
+          <Card className="bg-zinc-800/50 border-zinc-700 h-[126px] ">
             <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
               <CardTitle className="text-zinc-100 text-sm font-medium">
                 Commit Streak
@@ -101,7 +101,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
               <Moon className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-white">
+              <div className="text-2xl mt-2 font-bold text-white">
                 {longestStreak} days
               </div>
             </CardContent>
