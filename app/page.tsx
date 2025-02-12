@@ -8,7 +8,7 @@ const HomePage = () => {
   const [commits, setCommits] = useState<GitHubCommitData[]>([]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center ">
+    <main className="flex min-h-screen flex-col items-center justify-center  p-6 ">
       <RepositoryInput setCommits={setCommits} />
 
       {commits.length > 0 && <CommitStats commits={commits} />}

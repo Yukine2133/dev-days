@@ -22,7 +22,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
   } = useCommitStats(commits);
 
   return (
-    <div className="w-[1280px] space-y-6">
+    <div className="w-full max-w-7xl space-y-6">
       <div className="grid gap-6 items-center md:grid-cols-2 lg:grid-cols-4  ">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
