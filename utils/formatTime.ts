@@ -24,3 +24,21 @@ export const formatCommitDate = (maxCommitDate: string) => {
   }
   return "";
 };
+
+export const getTimeAgo = (date: string) => {
+  const now = new Date();
+  const commitDate = new Date(date);
+  const diffInDays = Math.floor(
+    (now.getTime() - commitDate.getTime()) / (1000 * 60 * 60 * 24)
+  );
+
+  if (diffInDays === 0) return "Today";
+  if (diffInDays === 1) return "Yesterday";
+  if (diffInDays < 30) return `${diffInDays} days ago`;
+  if (diffInDays < 365) {
+    const months = Math.floor(diffInDays / 30);
+    return `${months} ${months === 1 ? "month" : "months"} ago`;
+  }
+  const years = Math.floor(diffInDays / 365);
+  return `${years} ${years === 1 ? "year" : "years"} ago`;
+};

@@ -6,6 +6,7 @@ import { formatCommitDate } from "@/utils/formatTime";
 import { useUniqueCommitDays } from "./commitsStats/useUniqueCommitDays";
 import { useCommitActivityAnalysis } from "./useCommitActivityAnalysis";
 import { useMostCommonCommitWords } from "./commitsStats/useMostCommonCommitWords";
+import { useFirstCommitDate } from "./commitsStats/useFirstCommitDate";
 
 export const useCommitStats = (commits: GitHubCommitData[]) => {
   const { maxCommitDate, maxCommits, commitCountByDay } =
@@ -15,6 +16,7 @@ export const useCommitStats = (commits: GitHubCommitData[]) => {
   const formattedMaxCommitDate = formatCommitDate(maxCommitDate);
   const uniqueCommitDays = useUniqueCommitDays(commits);
   const mostCommonWords = useMostCommonCommitWords(commits);
+  const firstCommitDate = useFirstCommitDate(commits);
 
   const {
     leastActiveTimePeriod,
@@ -41,5 +43,6 @@ export const useCommitStats = (commits: GitHubCommitData[]) => {
     mostActiveTimePeriod,
     timeLabels,
     mostCommonWords,
+    firstCommitDate,
   };
 };
