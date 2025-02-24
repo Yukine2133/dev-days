@@ -82,7 +82,7 @@ const RepositoryInput = ({
       </div>
       {error && <p className="text-red-500">{error}</p>}
 
-      {committers.length > 0 && (
+      {committers.length > 1 && (
         <CommitterSelect
           committers={committers}
           selectedCommitter={selectedCommitter}
