@@ -2,10 +2,8 @@ import { useCommitStats } from "@/hooks/useCommitStats";
 import { CommitStatsProps } from "@/interfaces/commit.interface";
 import { Heatmap } from "./HeatMap";
 import { Clock, Calendar, GitCommit, Moon, Sun } from "lucide-react";
-import { formatHour } from "@/utils/formatHour";
 import { CommitStatsCard } from "./CommitStatsCard";
-import { formatDate } from "@/utils/formatDate";
-import { getTimeAgo } from "@/utils/formatTime";
+import { formatDate, formatHour, getTimeAgo } from "@/utils/formatTime";
 
 const CommitStats = ({ commits }: CommitStatsProps) => {
   const {

@@ -1,5 +1,5 @@
 import { GitHubCommitData } from "@/interfaces/commit.interface";
-import { formatDate } from "@/utils/formatDate";
+import { formatDate } from "@/utils/formatTime";
 import { useMemo } from "react";
 
 export const useUniqueCommitDays = (commits: GitHubCommitData[]) => {
