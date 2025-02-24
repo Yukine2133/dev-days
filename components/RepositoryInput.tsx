@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { fetchRepoCommits } from "@/actions/github.actions";
 import { GitHubCommitData } from "@/interfaces/commit.interface";
+import { CommitterSelect } from "./CommiterSelect";
 
 const RepositoryInput = ({
   setCommits,
@@ -13,11 +14,15 @@ const RepositoryInput = ({
 }) => {
   const [repoUrl, setRepoUrl] = useState("");
   const [error, setError] = useState("");
+  const [allCommits, setAllCommits] = useState<GitHubCommitData[]>([]);
+  const [committers, setCommitters] = useState<string[]>([]);
+  const [selectedCommitter, setSelectedCommitter] = useState<
+    string | undefined
+  >("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Extract owner and repo from URL
     const match = repoUrl.match(
       /^https:\/\/github\.com\/([^/]+)\/([^/]+)(\/.*)?$/
     );
@@ -31,13 +36,33 @@ const RepositoryInput = ({
 
     setError("");
     const commits = await fetchRepoCommits(owner, repo);
-    console.log(commits);
+    setAllCommits(commits);
+
+    // Extract unique committers
+    const uniqueCommitters = [
+      ...new Set(
+        commits.filter((c) => c.committer?.login).map((c) => c.committer!.login)
+      ),
+    ];
+    setCommitters(uniqueCommitters);
+    setSelectedCommitter("");
     setCommits(commits);
   };
 
+  useEffect(() => {
+    if (selectedCommitter) {
+      const filtered = allCommits.filter(
+        (commit) => commit.committer?.login === selectedCommitter
+      );
+      setCommits(filtered);
+    } else {
+      setCommits(allCommits); // Show all if none selected
+    }
+  }, [selectedCommitter, allCommits, setCommits]);
+
   return (
     <form
-      className="flex mb-6 w-full max-w-7xl  flex-col  justify-center "
+      className="flex mb-6 w-full max-w-7xl flex-col justify-center"
       onSubmit={handleSubmit}
     >
       <div className="relative">
@@ -56,6 +81,14 @@ const RepositoryInput = ({
         </Button>
       </div>
       {error && <p className="text-red-500">{error}</p>}
+
+      {committers.length > 0 && (
+        <CommitterSelect
+          committers={committers}
+          selectedCommitter={selectedCommitter}
+          setSelectedCommitter={setSelectedCommitter}
+        />
+      )}
     </form>
   );
 };
