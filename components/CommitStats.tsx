@@ -21,13 +21,28 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
 
   return (
     <div className="w-full max-w-7xl space-y-6">
-      <div className="grid gap-6 items-center md:grid-cols-2 lg:grid-cols-4  ">
+      <div className="grid gap-6 items-stretch grid-cols-1 sm:grid-cols-2 xl:grid-cols-5">
+        {/* Total Commits */}
+        <CommitStatsCard
+          Icon={GitCommit}
+          label="Total Commits"
+          delay={0.1}
+          className="h-[126px]"
+        >
+          <div className="space-y-1">
+            <h2 className="text-2xl font-bold text-white">{commits.length}</h2>
+            <p className="text-xs text-zinc-400">
+              Avg. {(commits.length / uniqueCommitDays).toFixed(1)} per day
+            </p>
+          </div>
+        </CommitStatsCard>
+
         {/* Project Duration */}
         <CommitStatsCard
           className="h-[126px]"
           Icon={Calendar}
           label="Project Duration"
-          delay={0.1}
+          delay={0.2}
         >
           <h2 className="text-2xl mt-2  font-bold text-white">
             {uniqueCommitDays} days
@@ -35,7 +50,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
         </CommitStatsCard>
 
         {/* Peak Activity */}
-        <CommitStatsCard Icon={Clock} label="Peak Activity" delay={0.2}>
+        <CommitStatsCard Icon={Clock} label="Peak Activity" delay={0.3}>
           <h2 className="text-2xl font-bold text-white">
             {formatHour(mostActiveHour.hour)}
           </h2>
@@ -44,17 +59,21 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
           </p>
         </CommitStatsCard>
 
-        <CommitStatsCard Icon={GitCommit} label="Most Active Day" delay={0.3}>
-          <h2 className="text-2xl font-bold text-white">
+        {/* Most Active Day */}
+
+        <CommitStatsCard Icon={GitCommit} label="Most Active Day" delay={0.4}>
+          <h2 className="text-[23px] font-bold text-white">
             {formattedMaxCommitDate}
           </h2>
           <p className="text-xs text-zinc-400">{maxCommits} commits</p>
         </CommitStatsCard>
 
+        {/* Longest Streak */}
+
         <CommitStatsCard
           Icon={Moon}
           label="Longest Streak"
-          delay={0.4}
+          delay={0.5}
           className="h-[126px]"
         >
           <h2 className="text-2xl mt-2 font-bold text-white">
@@ -64,7 +83,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
       </div>
 
       {/* Commit Patterns */}
-      <CommitStatsCard Icon={Moon} label="Commit Patterns" delay={0.5}>
+      <CommitStatsCard Icon={Moon} label="Commit Patterns" delay={0.6}>
         <div className="space-y-2  ">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -95,7 +114,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
       <CommitStatsCard
         Icon={GitCommit}
         label="Most Common Commit Words"
-        delay={0.6}
+        delay={0.7}
       >
         <div className="space-y-2">
           {mostCommonWords.map(({ word, count }, index) => (
