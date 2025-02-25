@@ -24,6 +24,7 @@
 - **TypeScript**
 - **Tailwind CSS**
 - **shadcn/ui**
+- **Framer-motion**s
 - **lucide-react**
 - **GitHub API**
 
