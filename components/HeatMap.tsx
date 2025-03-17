@@ -2,15 +2,13 @@
 
 import { useState } from "react";
 import HeatMap from "@uiw/react-heat-map";
-import type { GitHubCommitData } from "@/interfaces/commit.interface";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface HeatMapProps {
-  commits: GitHubCommitData[];
   heatmapData: { date: string; count: number }[];
 }
 
-export const Heatmap = ({ commits, heatmapData }: HeatMapProps) => {
+export const Heatmap = ({ heatmapData }: HeatMapProps) => {
   const [selected, setSelected] = useState("");
 
   return (
@@ -28,7 +26,7 @@ export const Heatmap = ({ commits, heatmapData }: HeatMapProps) => {
             }}
             weekLabels={["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]}
             startDate={
-              new Date(commits[commits.length - 1]?.commit.committer.date)
+              new Date(new Date().setFullYear(new Date().getFullYear() - 1))
             }
             rectSize={14}
             space={4}

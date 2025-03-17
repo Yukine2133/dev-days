@@ -28,11 +28,9 @@ export const useLongestCommitStreak = (commits: GitHubCommitData[]) => {
       currentStreak++;
     } else if (diffInDays > 1) {
       longestStreak = Math.max(longestStreak, currentStreak);
-      currentStreak = 1; // Reset streak
+      currentStreak = 1;
     }
   }
-
-  // Ensure the last streak is considered
   longestStreak = Math.max(longestStreak, currentStreak);
 
   return longestStreak;

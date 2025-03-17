@@ -156,7 +156,7 @@ const CommitStats = ({ commits }: CommitStatsProps) => {
         </div>
       </CommitStatsCard>
 
-      <Heatmap commits={commits} heatmapData={heatmapData} />
+      <Heatmap heatmapData={heatmapData} />
     </div>
   );
 };
