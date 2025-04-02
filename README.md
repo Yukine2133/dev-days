@@ -4,6 +4,14 @@
 
 ---
 
+## Usage
+
+1. **Enter a GitHub Repository URL:** Paste the URL of any **public** GitHub repository. _(Private repositories are currently not supported.)_
+2. **Analyze Commits:** The app will retrieve commit data and process it for analysis. _(Depending on the repository size, this may take a few moments.)_
+3. **Explore Insights:** Browse through various statistics, including commit patterns, activity heatmaps, and more.
+
+---
+
 ## Features
 
 - **Total Commits**: Displays the total number of commits made in the repository.
@@ -67,13 +75,7 @@
 
 ---
 
-## Usage
 
-1. **Enter a GitHub Repository URL:** Paste the URL of any **public** GitHub repository. _(Private repositories are currently not supported.)_
-2. **Analyze Commits:** The app will retrieve commit data and process it for analysis. _(Depending on the repository size, this may take a few moments.)_
-3. **Explore Insights:** Browse through various statistics, including commit patterns, activity heatmaps, and more.
-
----
 
 ## About the Project
 
