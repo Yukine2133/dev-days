@@ -9,8 +9,10 @@ import { CommitterSelect } from "./CommiterSelect";
 
 const RepositoryInput = ({
   setCommits,
+  setLoading,
 }: {
   setCommits: (arg0: GitHubCommitData[]) => void;
+  setLoading: (arg0: boolean) => void;
 }) => {
   const [repoUrl, setRepoUrl] = useState("");
   const [error, setError] = useState("");
@@ -21,32 +23,42 @@ const RepositoryInput = ({
   >("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+      setLoading(true);
 
-    const match = repoUrl.match(
-      /^https:\/\/github\.com\/([^/]+)\/([^/]+)(\/.*)?$/
-    );
+      const match = repoUrl.match(
+        /^https:\/\/github\.com\/([^/]+)\/([^/]+)(\/.*)?$/
+      );
 
-    if (!match) {
-      setError("Invalid GitHub repository URL.");
-      return;
+      if (!match) {
+        setError("Invalid GitHub repository URL.");
+        return;
+      }
+
+      const [, owner, repo] = match;
+
+      setError("");
+      const commits = await fetchRepoCommits(owner, repo);
+      setAllCommits(commits);
+
+      // Extract unique committers
+      const uniqueCommitters = [
+        ...new Set(
+          commits
+            .filter((c) => c.committer?.login)
+            .map((c) => c.committer!.login)
+        ),
+      ];
+      setCommitters(uniqueCommitters);
+      setSelectedCommitter("");
+      setCommits(commits);
+    } catch (error) {
+      setError("Something went wrong. Please try again");
+    } finally {
+      setError("");
+      setLoading(false);
     }
-
-    const [, owner, repo] = match;
-
-    setError("");
-    const commits = await fetchRepoCommits(owner, repo);
-    setAllCommits(commits);
-
-    // Extract unique committers
-    const uniqueCommitters = [
-      ...new Set(
-        commits.filter((c) => c.committer?.login).map((c) => c.committer!.login)
-      ),
-    ];
-    setCommitters(uniqueCommitters);
-    setSelectedCommitter("");
-    setCommits(commits);
   };
 
   useEffect(() => {
