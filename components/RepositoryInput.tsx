@@ -3,7 +3,7 @@
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { GitHubCommitData } from "@/interfaces/commit.interface";
-import { CommitterSelect } from "./CommiterSelect";
+import { CommitterSelect } from "./CommitterSelect";
 import { useRepositoryInput } from "@/hooks/useRepositoryInput";
 
 export interface IRepositoryInputProps {
